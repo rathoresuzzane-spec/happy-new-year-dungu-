@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy New Year, My Love ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* Stars */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(1.5px 1.5px at 70% 40%, white, transparent),
+        radial-gradient(1px 1px at 50% 80%, white, transparent),
+        radial-gradient(2px 2px at 90% 20%, white, transparent);
+      opacity: 0.6;
+      z-index: -2;
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+
+    .countdown {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      color: #ffd6e0;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 30px;
+      max-width: 560px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+    }
+
+    .photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .photo {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .names {
+      margin: 12px 0 18px;
+      font-size: 1.2rem;
+      color: #ffb3c6;
+      font-weight: 500;
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .promise {
+      margin-top: 15px;
+      font-size: 1.15rem;
+      color: #ffe066;
+    }
+
+    button {
+      margin-top: 22px;
+      padding: 12px 26px;
+      border: none;
+      border-radius: 30px;
+      background: #ffffff;
+      color: #ff4d6d;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .hidden-message {
+      display: none;
+      margin-top: 18px;
+      font-size: 1.25rem;
+    }
+
+    /* Fireworks */
+    .firework {
+      position: fixed;
+      font-size: 26px;
+      pointer-events: none;
+      animation: burst 1.6s ease-out forwards;
+    }
+
+    @keyframes burst {
+      0% { transform: scale(0.3); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background music -->
+  <audio id="bgm" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <h1>🎆 Happy New Year 🎆</h1>
+    <h2>To the love of my life 💕</h2>
+    <div class="countdown" id="countdown">Counting down to midnight… ⏳✨</div>
+
+    <div class="card">
+
+      <div class="photos">
+        <img src="Snapchat-1132047388.jpg" class="photo" alt="Us together" />
+        <img src="Snapchat-696800322.jpg" class="photo" alt="Us together" />
+      </div>
+
+      <div class="names">pisshies & kissies for life &lt;3</div>
+
+      <p>
+        Another year has ended, and a new one begins — and all I know is that
+        I want every moment of it with you. ✨
+      </p>
+      <p>
+        You are my favorite part of every day, my safe place, and my biggest blessing.
+        Here’s to love, laughter, and endless memories together. 💖
+      </p>
+
+      <div class="promise">💍 New Year Promise: <br> <strong>we are getting engaged this year ;)</strong></div>
+
+      <button onclick="celebrate(event)">Click to celebrate 💝🎇</button>
+
+      <div class="hidden-message" id="message">
+        I love you endlessly, today and always. 🥰<br />
+        Happy New Year, my forever ❤️✨
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fireworks = ['🎆','🎇','✨','💖'];
+
+    function celebrate(e) {
+      document.getElementById('message').style.display = 'block';
+      document.getElementById('bgm').play();
+
+      for (let i = 0; i < 12; i++) {
+        const fw = document.createElement('div');
+        fw.className = 'firework';
+        fw.style.left = (e.clientX + (Math.random()*120 - 60)) + 'px';
+        fw.style.top = (e.clientY + (Math.random()*120 - 60)) + 'px';
+        fw.innerText = fireworks[Math.floor(Math.random() * fireworks.length)];
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1600);
+      }
+    }
+
+    // Countdown to midnight
+    function updateCountdown() {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(24,0,0,0);
+      const diff = midnight - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').innerText = '🎉 It’s Midnight! Happy New Year, my love! 🎉';
+        return;
+      }
+
+      const h = Math.floor(diff / (1000 * 60 * 60));
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('countdown').innerText = `Midnight in ${h}h ${m}m ${s}s ✨`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
